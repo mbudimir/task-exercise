@@ -1,0 +1,25 @@
+<b class="error">{{errorMsg}}</b>
+<form ngNativeValidate [formGroup]="taskForm" (ngSubmit)="create()">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input formControlName="name" name="name" required type="text" class="form-control" id="name">
+    </div>
+    <div class="form-group">
+        <label for="descripcion">Descripcion</label>
+        <textarea formControlName="description" required name="description" class="form-control" id="descripcion"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="estimate">Estimate</label>
+        <input formControlName="estimate" required name="estimate" class="form-control" type="number" id="estimated">
+    </div>
+    <div class="form-group">
+        <label for="inputState">State</label>
+
+        <select required class="form-control" formControlName="state">>
+                <option value= null >Select Item</option>
+              <option *ngFor="let st of states" [ngValue]="st">{{st.name}}</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+    <button type="button" routerLink="/task" class="btn btn-danger btn-lg">Cancel</button>
+</form>

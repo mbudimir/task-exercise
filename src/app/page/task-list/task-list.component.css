@@ -1,0 +1,13 @@
+button {
+    margin: 1%;
+}
+
+table {
+    margin: 1%;
+}
+
+.error {
+    font-size: 30;
+    color: red;
+    margin: 1%;
+}

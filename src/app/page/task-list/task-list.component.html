@@ -1,0 +1,57 @@
+<app-total-hours [complete]=completeVar [planned]=plannedVar [inProgress]=inProgressVar></app-total-hours>
+<b class="error">{{errorMsg}}</b>
+<h2 style="text-align: center">
+    Tasks list</h2>
+<hr />
+<button routerLink="/create" class="btn btn-primary btn-with-icon">
+    <i class="fas fa-plus"></i>
+    Add
+</button>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Estimate</th>
+            <th scope="col">State</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let task of taskList">
+            <th scope="row">{{task.id}}</th>
+            <td>{{task.name}}</td>
+            <td>{{task.description}}</td>
+            <td>{{task.estimate}}</td>
+            <td *ngIf="task.state == 1">Planned</td>
+            <td *ngIf="task.state == 2">In progress</td>
+            <td *ngIf="task.state == 3">Complete</td>
+            <td><i class="fas fa-edit" (click)="open(content,task)"></i></td>
+            <td><i class="fas fa-trash-alt" (click)="delete(task)"></i></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">State update</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <p>{{selectedTask.name}}</p>
+        </div>
+        <select class="form-control" [(ngModel)]="selectedState">
+            <option *ngFor="let st of states" [ngValue]="st">{{st.name}}</option>
+      </select>
+    </div>
+    <div class="modal-footer">
+        <button type="button" (click)="edit()" class="btn btn-outline-dark">Confirm</button>
+    </div>
+</ng-template>
